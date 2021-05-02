@@ -1,0 +1,90 @@
+package modules.auth.domain.models;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class UserModel {
+    private String name;
+    private String undername;
+    private String CPF;
+    private String email;
+    private String city;
+    private String password;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUndername() {
+        return undername;
+    }
+
+    public void setUndername(String undername) {
+        this.undername = undername;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public Map toMap(){
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("name", this.name);
+        map.put("undername", this.undername);
+        map.put("CPF", this.CPF);
+        map.put("email", this.email);
+        map.put("city", this.city);
+        map.put("password", this.password);
+
+        return map;
+    }
+
+    public UserModel fromMap(Map<String, String> map){
+
+        UserModel model = new UserModel();
+        model.setName(map.get("name"));
+        model.setUndername(map.get("undername"));
+        model.setCPF(map.get("CPF"));
+        model.setCity(map.get("city"));
+        model.setEmail(map.get("email"));
+        model.setPassword(map.get("password"));
+
+        return model;
+    }
+
+}
