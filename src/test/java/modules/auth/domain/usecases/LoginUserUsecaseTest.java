@@ -2,7 +2,7 @@ package modules.auth.domain.usecases;
 
 
 import modules.auth.domain.errors.IAuthException;
-import modules.auth.domain.errors.RegisterUserFailure;
+import modules.auth.domain.models.AuthParam;
 import modules.auth.domain.models.UserModel;
 import modules.auth.domain.repository.IAuthRepository;
 import org.junit.jupiter.api.Assertions;
@@ -18,15 +18,15 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-public class RegisterUserUsecaseTest {
-    private IRegisterUserUsecase registerUserUsecase;
-    private UserModel user = new UserModel();
+public class LoginUserUsecaseTest {
+    private ILoginUserUsecase loginUserUsecase;
+    private AuthParam userParam = new AuthParam();
+    private UserModel userLogged = new UserModel();
     //user.setName('name');
 
     @Mock
@@ -34,32 +34,34 @@ public class RegisterUserUsecaseTest {
 
     @BeforeEach
     public void setUp() {
-        registerUserUsecase = new RegisterUserUsecase(repository);
+        loginUserUsecase = new LoginUserUsecase(repository);
+        userParam.setEmail("email");
+        userParam.setPassword("password");
 
     }
 
 
     //@DisplayName("Should return a userModel")
     @Test
-    public void testRegisterSucces() throws IAuthException {
-        Mockito.lenient().when(repository.registerUser(any())).thenReturn(user);
-        when(repository.registerUser(any(UserModel.class))).then(new Answer<UserModel>() {
+    public void testLoginSucces() throws IAuthException {
+        Mockito.lenient().when(repository.loginUser(any())).thenReturn(userLogged);
+        when(repository.loginUser(any(AuthParam.class))).then(new Answer<UserModel>() {
             //int sequence = 1;
 
             @Override
             public UserModel answer(InvocationOnMock invocation) throws Throwable {
-                UserModel user = (UserModel) invocation.getArgument(0);
-                user.setName("sequence++");
-                return user;
+                //UserModel user = (UserModel) invocation.callRealMethod();
+                userLogged.setName("sequence++");
+                return userLogged;
             }
         });
 
         //when(repository.registerUser(any())).thenReturn(user);
-        UserModel userResult = registerUserUsecase.registerUser(user);
+        UserModel userResult = loginUserUsecase.loginUser(userParam);
 
-        Mockito.verify(repository).registerUser(user);
+        Mockito.verify(repository).loginUser(userParam);
         Assertions.assertNotNull(userResult);
-        Mockito.verify(repository).registerUser(Matchers.isA(UserModel.class));
+        Mockito.verify(repository).loginUser(Matchers.isA(AuthParam.class));
 
         //Mockito.verify(mailClient).sendUserRegistrationMail(insertedUser);
 
