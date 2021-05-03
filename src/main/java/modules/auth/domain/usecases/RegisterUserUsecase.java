@@ -12,8 +12,22 @@ interface IRegisterUserUsecase {
 public class RegisterUserUsecase implements IRegisterUserUsecase {
     private IAuthRepository _repository;
 
-    public RegisterUserUsecase(IAuthRepository repository){
+    private static RegisterUserUsecase instance;
+
+    private RegisterUserUsecase(IAuthRepository repository) {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         this._repository = repository;
+    }
+
+    public static RegisterUserUsecase getInstance(IAuthRepository repository) {
+        if (instance == null) {
+            instance = new RegisterUserUsecase(repository);
+        }
+        return instance;
     }
 
 

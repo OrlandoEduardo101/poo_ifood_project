@@ -4,6 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserModel {
+
+    public UserModel() {}
+
+    public UserModel(String name, String undername, String CPF, String email, String city, String password) {
+        this.name = name;
+        this.undername = undername;
+        this.CPF = CPF;
+        this.email = email;
+        this.city = city;
+        this.password = password;
+    }
+
     private String name;
     private String undername;
     private String CPF;
@@ -74,7 +86,7 @@ public class UserModel {
         return map;
     }
 
-    public UserModel fromMap(Map<String, String> map){
+    public static UserModel fromMap(Map<String, String> map){
 
         UserModel model = new UserModel();
         model.setName(map.get("name"));

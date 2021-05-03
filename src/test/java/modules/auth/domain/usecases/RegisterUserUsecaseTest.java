@@ -34,7 +34,7 @@ public class RegisterUserUsecaseTest {
 
     @BeforeEach
     public void setUp() {
-        registerUserUsecase = new RegisterUserUsecase(repository);
+        registerUserUsecase = RegisterUserUsecase.getInstance(repository);
 
     }
 

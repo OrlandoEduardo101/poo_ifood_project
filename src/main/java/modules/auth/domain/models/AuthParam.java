@@ -5,6 +5,14 @@ import java.util.Map;
 
 public class AuthParam {
     private String email;
+
+    public AuthParam() {}
+
+    public AuthParam(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     private String password;
 
     public String getEmail() {

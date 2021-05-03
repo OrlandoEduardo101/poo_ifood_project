@@ -34,7 +34,7 @@ public class LoginUserUsecaseTest {
 
     @BeforeEach
     public void setUp() {
-        loginUserUsecase = new LoginUserUsecase(repository);
+        loginUserUsecase = LoginUserUsecase.getInstance(repository);
         userParam.setEmail("email");
         userParam.setPassword("password");
 

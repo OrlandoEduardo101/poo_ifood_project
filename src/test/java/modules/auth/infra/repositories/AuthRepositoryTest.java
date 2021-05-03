@@ -4,7 +4,6 @@ import modules.auth.domain.errors.IAuthException;
 import modules.auth.domain.models.AuthParam;
 import modules.auth.domain.models.UserModel;
 import modules.auth.domain.repository.IAuthRepository;
-import modules.auth.domain.usecases.LoginUserUsecase;
 import modules.auth.infra.datasources.IAuthDatasource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +32,7 @@ class AuthRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        authRepository = new AuthRepository(datasource);
+        authRepository = AuthRepository.getInstance(datasource);
         userParam.setEmail("email");
         userParam.setPassword("password");
     }

@@ -13,10 +13,28 @@ interface ILoginUserUsecase {
 
 public class LoginUserUsecase implements ILoginUserUsecase {
     private IAuthRepository _repository;
+    private static LoginUserUsecase instance;
 
-    public LoginUserUsecase(IAuthRepository repository){
+    private LoginUserUsecase(IAuthRepository repository) {
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         this._repository = repository;
     }
+
+    public static LoginUserUsecase getInstance(IAuthRepository repository) {
+        if (instance == null) {
+            instance = new LoginUserUsecase(repository);
+        }
+        return instance;
+    }
+
+   /* public LoginUserUsecase(IAuthRepository repository){
+        this._repository = repository;
+    }*/
 
     @Override
     public UserModel loginUser(AuthParam authParam) throws IAuthException {
