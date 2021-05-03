@@ -7,6 +7,7 @@ import modules.auth.external.datasources.AuthDatasource;
 import modules.auth.infra.datasources.IAuthDatasource;
 import modules.auth.infra.repositories.AuthRepository;
 import modules.auth.presenter.login.LoginController;
+import modules.auth.presenter.register.RegisterController;
 
 public class StartModule {
     public InjectionDependency serviceLocator = InjectionDependency.getInstance();
@@ -43,6 +44,7 @@ public class StartModule {
 
         //presenter
         serviceLocator.register("LoginController", new LoginController((LoginUserUsecase) serviceLocator.get("ILoginUserUsecase")));
+        serviceLocator.register("RegisterController", new RegisterController((RegisterUserUsecase) serviceLocator.get("IRegisterUserUsecase")));
 
     }
 

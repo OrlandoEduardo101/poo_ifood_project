@@ -1,5 +1,6 @@
 package modules.auth.presenter;
 import modules.auth.presenter.login.LoginPage;
+import modules.auth.presenter.register.RegisterPage;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -30,6 +31,7 @@ public class Auth {
             //return;
         } else if(option == 1){
             System.out.println("[1] to register page ");
+            new RegisterPage().register();
             //return;
         } else if(option == 0){
             System.out.println("[3] to exit ");
