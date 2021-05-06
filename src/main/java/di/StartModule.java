@@ -8,6 +8,7 @@ import modules.auth.infra.datasources.IAuthDatasource;
 import modules.auth.infra.repositories.AuthRepository;
 import modules.auth.presenter.login.LoginController;
 import modules.auth.presenter.register.RegisterController;
+import shared.AuthStore.AuthStore;
 
 public class StartModule {
     public InjectionDependency serviceLocator = InjectionDependency.getInstance();
@@ -32,6 +33,11 @@ public class StartModule {
 
     public void initInjection(){
 
+        //Global
+        serviceLocator.register("AuthStore", new AuthStore.getInstance());
+
+        /* Auth Binds */
+
         //external
         serviceLocator.register("IAuthDatasource", AuthDatasource.getInstance());
 
@@ -43,8 +49,11 @@ public class StartModule {
         serviceLocator.register("ILoginUserUsecase", LoginUserUsecase.getInstance((IAuthRepository) serviceLocator.get("IAuthRepository")));
 
         //presenter
-        serviceLocator.register("LoginController", new LoginController((LoginUserUsecase) serviceLocator.get("ILoginUserUsecase")));
-        serviceLocator.register("RegisterController", new RegisterController((RegisterUserUsecase) serviceLocator.get("IRegisterUserUsecase")));
+        serviceLocator.register("LoginController", new LoginController((LoginUserUsecase) serviceLocator.get("ILoginUserUsecase"), (AuthStore) serviceLocator.get("AuthStore")));
+        serviceLocator.register("RegisterController", new RegisterController((RegisterUserUsecase) serviceLocator.get("IRegisterUserUsecase"), (AuthStore) serviceLocator.get("AuthStore")));
+
+
+
 
     }
 

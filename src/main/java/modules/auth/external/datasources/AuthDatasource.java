@@ -35,12 +35,14 @@ public class AuthDatasource implements IAuthDatasource {
     UserModel user1 = new UserModel("User 1", "User 1", "123.456.789-00", "user1@user.com", "user city", "123456");
     UserModel user2 = new UserModel("User 2", "User 2", "123.456.789-00", "user2@user.com", "user city", "123456");
     UserModel user3 = new UserModel("User 3", "User 3", "123.456.789-00", "user3@user.com", "user city", "123456");
-
     Map<Integer, Map<String, String>> usersList = new HashMap<Integer, Map<String, String>>();
 
 
 
     public void fillDataBase() {
+        user1.setId(0);
+        user2.setId(1);
+        user3.setId(2);
         usersList.put(0, user1.toMap());
         usersList.put(1, user2.toMap());
         usersList.put(2, user3.toMap());
@@ -51,6 +53,7 @@ public class AuthDatasource implements IAuthDatasource {
         if (usersList.isEmpty()) fillDataBase();
         int id = usersList.size();
         int keyLogged = -1;
+        userModel.setId(id);
         usersList.put(id, userModel.toMap());
 
         keyLogged = getKeyLogged(keyLogged, userModel.getEmail(), userModel.getPassword());

@@ -23,7 +23,15 @@ public class UserModel {
     private String city;
     private String password;
     private String confirmPassword;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -84,6 +92,7 @@ public class UserModel {
     public boolean isValidPassword() {
         return getPassword().equalsIgnoreCase(getConfirmPassword());
     }
+
 
 
     public Map toMap(){
