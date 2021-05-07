@@ -150,20 +150,26 @@ public class HomeDatasource implements IHomeDatasource {
     public List<AnnouncementEntity> deleteMyAnnouncement(int userID, String productCode) throws ListAnnouncementError, IHomeException {
         if (announcementList.isEmpty()) fillDataBase();
 
-        List<AnnouncementEntity> listAnonouncementEntity = new ArrayList<AnnouncementEntity>();
-        int removed = 0;
+        boolean removed = false;
+        int removeKey = -1;
 
         for (Map.Entry<Integer, Map<String, Object>> entry : announcementList.entrySet()) {
             int key = entry.getKey();
             Map<String, Object> value = entry.getValue();
             AnnouncementEntity tempEntity = AnnouncementEntity.fromMap(value);
-            if(tempEntity.getId() == userID && tempEntity.getProductCode() == productCode) {
-                announcementList.remove(tempEntity.getId());
-                removed++;
+            if(tempEntity.getSellerId() == userID && tempEntity.getProductCode().equalsIgnoreCase(productCode)) {
+                //announcementList.keySet().removeIf(keyValue -> keyValue == key);
+                removeKey = key;
+                removed = true;
             }
         }
 
-        if (removed == 0){
+        if (removeKey != -1){
+            announcementList.remove(removeKey);
+        }
+
+
+        if (!removed){
             throw new DeleteAnnouncementError("no items found");
         }
 

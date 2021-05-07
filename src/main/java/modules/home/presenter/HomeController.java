@@ -36,4 +36,8 @@ public class HomeController {
         announcementEntityList = _listMyAnnouncementUsecase.listMyAnnouncement(_authStore.getLoggedUser().getId());
     }
 
+    public void deleteMyAnnoucement(String code) throws IHomeException {
+        announcementEntityList = _deleteMyAnnouncementUsecase.deleteMyAnnouncement(_authStore.getLoggedUser().getId(), code);
+    }
+
 }

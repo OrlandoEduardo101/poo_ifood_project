@@ -10,10 +10,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HomePage {
-    public void menu(){
+
+    Scanner scanner = new Scanner(System.in);
+    HomeController controller = (HomeController) InjectionDependency.getInstance().get("HomeController");
+
+    public void menu() throws IHomeException {
         int option = -1;
-        Scanner scanner = new Scanner(System.in);
-        HomeController controller = (HomeController) InjectionDependency.getInstance().get("HomeController");
+
         do {
             try{
                 System.out.println("Please enter choose a option: ");
@@ -40,8 +43,14 @@ public class HomePage {
             System.out.println("[1] List All Annoucement");
             try{
                 controller.listAll();
-                for (int i = 0; i < controller.announcementEntityList.size(); i++) {
-                    System.out.println(controller.announcementEntityList.get(i).toString() + "\n");
+                if(controller.announcementEntityList.size() > 10) {
+                    for (int i = 0; i < 10; i++) {
+                        System.out.println(controller.announcementEntityList.get(i).toString() + "\n");
+                    }
+                } else {
+                    for (int i = 0; i < controller.announcementEntityList.size(); i++) {
+                        System.out.println(controller.announcementEntityList.get(i).toString() + "\n");
+                    }
                 }
             } catch (InputMismatchException | IHomeException inputMismatchException) {
                 System.err.printf("%nException: %s%n", inputMismatchException);
@@ -53,9 +62,14 @@ public class HomePage {
             System.out.println("[2] List My Annoucement");
             try{
                 controller.listMyAll();
-                for (int i = 0; i < controller.announcementEntityList.size(); i++) {
-                    System.out.println(controller.announcementEntityList.get(i).toString() + "\n");
-                }
+                if(controller.announcementEntityList.size() > 10) {
+                    for (int i = 0; i < 10; i++) {
+                        System.out.println(controller.announcementEntityList.get(i).toString() + "\n");
+                    }
+                } else {
+                    for (int i = 0; i < controller.announcementEntityList.size(); i++) {
+                        System.out.println(controller.announcementEntityList.get(i).toString() + "\n");
+                    } }
             } catch (InputMismatchException | IHomeException inputMismatchException) {
                 System.err.printf("%nException: %s%n", inputMismatchException);
                 scanner.nextLine(); // discard input so user can try again
@@ -64,11 +78,25 @@ public class HomePage {
             //return;
         } else if(option == 3){
             System.out.println("[3] Delete My Annoucement");
-            menu();
+            deleteAnnoucement();
+            //menu();
             //return;
         } else if(option == 4){
             System.out.println("[4] to exit");
             //return;
         }
     }
+
+    public void deleteAnnoucement() throws IHomeException {
+        try {
+            System.out.println("Enter product code to delete");
+            String code = scanner.next();
+            controller.deleteMyAnnoucement(code);
+            System.err.println("\nDeletado com sucesso");
+        }  catch (InputMismatchException | IHomeException inputMismatchException) {
+            System.err.printf("%nException: %s%n", inputMismatchException);
+            scanner.nextLine(); // discard input so user can try again
+        }
+        menu();
+    };
 }
