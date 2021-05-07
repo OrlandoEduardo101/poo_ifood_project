@@ -1,9 +1,5 @@
-package modules.home.datasource;
+package modules.home.external.datasource;
 
-import modules.auth.domain.errors.RegisterUserFailure;
-import modules.auth.domain.models.UserModel;
-import modules.auth.external.datasources.AuthDatasource;
-import modules.auth.infra.datasources.IAuthDatasource;
 import modules.home.domain.entities.AnnouncementEntity;
 import modules.home.domain.entities.DrinkModel;
 import modules.home.domain.entities.MarketModel;
@@ -142,7 +138,7 @@ public class HomeDatasource implements IHomeDatasource {
             int key = entry.getKey();
             Map<String, Object> value = entry.getValue();
             AnnouncementEntity tempEntity = AnnouncementEntity.fromMap(value);
-            if(tempEntity.getId() == userID) {
+            if(tempEntity.getSellerId() == userID) {
                 listAnonouncementEntity.add(tempEntity);
             }
         }

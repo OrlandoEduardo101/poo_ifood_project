@@ -28,11 +28,11 @@ public class HomeRepository implements IHomeRepository {
         this._datasource = datasource;
     }
 
-    public static AuthRepository getInstance(IHomeDatasource datasource) {
+    public static HomeRepository getInstance(IHomeDatasource datasource) {
         if (instance == null) {
             instance = new HomeRepository(datasource);
         }
-        return (AuthRepository) instance;
+        return (HomeRepository) instance;
     }
 
 
