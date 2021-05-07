@@ -74,6 +74,7 @@ public class StartModule {
         serviceLocator.register("IListAllAnnouncementUsecase", ListAllAnnouncementUsecase.getInstance((IHomeRepository) serviceLocator.get("IHomeRepository")));
         serviceLocator.register("IListMyAnnouncementUsecase", ListMyAnnouncementUsecase.getInstance((IHomeRepository) serviceLocator.get("IHomeRepository")));
         serviceLocator.register("IDeleteMyAnnouncementUsecase", DeleteMyAnnouncementUsecase.getInstance((IHomeRepository) serviceLocator.get("IHomeRepository")));
+        serviceLocator.register("ICreateAnnouncementUsecase", CreateAnnouncementUsecase.getInstance((IHomeRepository) serviceLocator.get("IHomeRepository")));
 
         //presenter
         serviceLocator.register("HomeController", new HomeController(

@@ -3,6 +3,8 @@ package modules.auth.presenter.register;
 import di.InjectionDependency;
 import modules.auth.domain.errors.IAuthException;
 import modules.auth.presenter.login.LoginController;
+import modules.home.domain.errors.IHomeException;
+import modules.home.presenter.HomePage;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -11,7 +13,7 @@ public class RegisterPage {
     RegisterController controller = (RegisterController) InjectionDependency.getInstance().get("RegisterController");
     Scanner scanner = new Scanner(System.in);
     int isLoop = 0;
-    public void register(){
+    public void register() throws IHomeException {
         do {
             try{
                 System.out.println("Please enter your name: ");
@@ -38,5 +40,6 @@ public class RegisterPage {
                 System.out.printf("Invalid credentios. Please try again.%n%n");
             }
         } while (isLoop == 0);
+        new HomePage().menu();
     }
 }

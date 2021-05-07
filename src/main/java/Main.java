@@ -11,6 +11,6 @@ public class Main {
 
         Auth auth = new Auth();
         auth.loginOrResgister();
-        new HomePage().menu();
+
     }
 }

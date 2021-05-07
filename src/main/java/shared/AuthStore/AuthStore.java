@@ -28,8 +28,8 @@ public class AuthStore {
         return _userLogged;
     }
 
-    public void setLoggedUser(UserModel _userModel) {
-        this._userLogged = _userLogged;
+    public void setLoggedUser(UserModel userModel) {
+        this._userLogged = userModel;
     }
 
     private UserModel _userLogged = new UserModel();

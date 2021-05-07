@@ -1,6 +1,7 @@
 package modules.auth.presenter;
 import modules.auth.presenter.login.LoginPage;
 import modules.auth.presenter.register.RegisterPage;
+import modules.home.domain.errors.IHomeException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 public class Auth {
     int option = -1;
     Scanner scanner = new Scanner(System.in);
-    public void loginOrResgister(){
+    public void loginOrResgister() throws IHomeException {
         do {
          try{
             System.out.println("Please enter choose a option: ");
