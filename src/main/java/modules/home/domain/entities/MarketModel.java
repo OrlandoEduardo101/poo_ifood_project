@@ -15,8 +15,19 @@ public class MarketModel extends  FoodEntity{
         this.productsList = productsList;
     }
 
-    public void fillProductsList(String name, Float price) {
+    public void fillProductsList(String name, float price) {
         this.productsList.put(name, price);
+        float total = 0;
+
+        for (Map.Entry<String, Float> entry : productsList.entrySet()) {
+            String key = entry.getKey();
+            float value = entry.getValue();
+            total = total + value;
+            //System.out.println(String.format("key: %s | value: %s", key, value));
+        }
+
+        setPrice("R$" + total);
+
     }
 
     @Override
@@ -24,7 +35,7 @@ public class MarketModel extends  FoodEntity{
         String listProduct = new String();
         for (Map.Entry<String, Float> entry : productsList.entrySet()) {
             String key = entry.getKey();
-            Float value = entry.getValue();
+            float value = entry.getValue();
             listProduct.concat(key + ": " + value + "\n");
             //System.out.println(String.format("key: %s | value: %s", key, value));
         }
