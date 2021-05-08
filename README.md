@@ -2,15 +2,15 @@
 
 This is a project of the discipline of Principle of Object Orientation, it consists of a project with functionalities inspired by iFood to put into practice the concepts learned during the course, concepts such as Inheritance, Composition, Polymorphism, Interfaces ..., as a challenge I set myself I will apply several concepts that I use in other languages, below is a summary of the applied techniques.
 
-##For this project the concepts of Clean Architecture were used, which consists of:
-####<a href=“https://github.com/Flutterando/Clean-Dart/blob/master/README_en.md“>(explanation taken from Flutterando's Clean Dart repository)</a>
+## For this project the concepts of Clean Architecture were used, which consists of:
+#### <a href=“https://github.com/Flutterando/Clean-Dart/blob/master/README_en.md“>(explanation taken from Flutterando's Clean Dart repository)</a>
 
-###Presenter
+### Presenter
 The Presenter layer is responsible to declare the I/O and the interactions of the application.
 
 If we take Flutter as an example, this layer would contain the Widgets, Pages and the State Management. On the other hand, if we were dealing with the backend, this layer would be where we would have the Handlers or Commands of our API.
 
-###Domain
+### Domain
 The Domain layer will contain our core business rules (entity) and application-specific business rules (usecases).
 
 Our entities must be simple objects, that may or not have validation rules for its data through functions or ValueObjects. The entity must not depend on any object of the other layers.
@@ -21,7 +21,7 @@ The Domain must be responsible only for the execution of the business rules. It 
 
 Taking a repository as example, we will have only the interface contract to this repository. The implementation of this contract must be done by a lower-level layer.
 
-###Infrastructure (Infra)
+### Infrastructure (Infra)
 This layer supports the Domain layer by implementing its interfaces. To do this, it have to adapt the external data so that it fullfill the domain contracts.
 
 This layer will, probably, have the implementation for some repository or service interface that can't depend on external data, like an API, or the access to some hardware, like a Bluetooth device.
@@ -32,7 +32,7 @@ Our suggestion is to create DataSource object when we want to access external da
 
 The external accesses like data sources and drivers must be implemented by another layer, leaving only the interface contracts in this layer.
 
-###External
+### External
 Here we implement the external accesses that depends on a hardware, package or highly-specific access.
 
 Basically, the External layer must contain everything that is expected to be highly volatile and constantly changed.
@@ -46,26 +46,26 @@ The data sources must only worry about discovering the external data and sending
 Likewise, the drivers objects must only provide the device hardware info that is required by the contract, and not deal with anything else.
 
 
-###Dependency Injection (DI) && Service Locator (SL) 
+### Dependency Injection (DI) && Service Locator (SL) 
 The Dependency and Localized Service injection system of instances was also used to create and inject the class ics into the classes that depend on these instances;
 
-###Singleton
+### Singleton
 Anti Pattern Singleton was also used to maintain only one instance of certain classes throughout the entire application.
 
-###S.O.L.I.D
+### S.O.L.I.D
 It is a set of five principles of good practice for maintaining a maintainable code.
 ####<a href=“https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898“>(More info here)</a>
 
-###Modules
+### Modules
 The system of modules was used to divide the code into mini-programs, separating the features and making the code more modular, making maintenance and organization easier.
 
-###Tests
+### Tests
 Part of the code has test coverage to ensure operation
 
-###Clean Code
+### Clean Code
 Clean code techniques were also applied to make the code more readable, with variable names and methods explaining its functionality in the code.
 
-###Next steps
+### Next steps
 - Replace mocked external with database integration
 - Adding new features
 - Create graphical interface
