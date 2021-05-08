@@ -54,7 +54,7 @@ Anti Pattern Singleton was also used to maintain only one instance of certain cl
 
 ### S.O.L.I.D
 It is a set of five principles of good practice for maintaining a maintainable code.
-####<a href=“https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898“>(More info here)</a>
+#### <a href=“https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898“>(More info here)</a>
 
 ### Modules
 The system of modules was used to divide the code into mini-programs, separating the features and making the code more modular, making maintenance and organization easier.
