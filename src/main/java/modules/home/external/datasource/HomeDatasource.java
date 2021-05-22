@@ -27,19 +27,14 @@ public class HomeDatasource implements IHomeDatasource {
         }
     }
 
-    public static IHomeDatasource getInstance(){
+    public static IHomeDatasource getInstance() {
         if (instance == null) {
             instance = new HomeDatasource();
         }
         return (HomeDatasource) instance;
     }
 
-
-
     Map<Integer, Map<String, Object>> announcementList = new HashMap<Integer, Map<String, Object>>();
-
-
-
 
     public void fillDataBase() {
         MealModel hamburger = new MealModel();
@@ -68,20 +63,32 @@ public class HomeDatasource implements IHomeDatasource {
         foodStamp.fillProductsList("potato", 10.0F);
         foodStamp.fillProductsList("yakult", 10.0F);
 
-        AnnouncementEntity announcement1 = new AnnouncementEntity(0, "Hamburger", "pão, egg e meal", 0, "Hamburger123", "User 1", hamburger);
-        AnnouncementEntity announcement2 = new AnnouncementEntity(1,"Coke", "Coke freezed 1 L", 0, "Coke123", "User 1", coke);
-        AnnouncementEntity announcement3 = new AnnouncementEntity(2,"Food Stamp", "food for a month", 0, "FoodStamp123", "User 1", hamburger);
-        AnnouncementEntity announcement4 = new AnnouncementEntity(3,"Hamburger 2", "pão, egg, salad e meal", 0, "Hamburger2123", "User 1", hamburger2);
+        AnnouncementEntity announcement1 = new AnnouncementEntity(0, "Hamburger", "pão, egg e meal", 0, "Hamburger123",
+                "User 1", hamburger);
+        AnnouncementEntity announcement2 = new AnnouncementEntity(1, "Coke", "Coke freezed 1 L", 0, "Coke123", "User 1",
+                coke);
+        AnnouncementEntity announcement3 = new AnnouncementEntity(2, "Food Stamp", "food for a month", 0,
+                "FoodStamp123", "User 1", hamburger);
+        AnnouncementEntity announcement4 = new AnnouncementEntity(3, "Hamburger 2", "pão, egg, salad e meal", 0,
+                "Hamburger2123", "User 1", hamburger2);
 
-        AnnouncementEntity announcement5 = new AnnouncementEntity(4,"Hamburger", "pão, egg e meal", 1, "Hamburger456", "User 2", hamburger);
-        AnnouncementEntity announcement6 = new AnnouncementEntity(5,"Coke", "Coke freezed 1 L", 1, "Coke456", "User 2", coke);
-        AnnouncementEntity announcement7 = new AnnouncementEntity(6,"Food Stamp", "food for a month", 1, "FoodStamp456", "User 2", hamburger);
-        AnnouncementEntity announcement8 = new AnnouncementEntity(7,"Hamburger 2", "pão, egg, salad e meal", 1, "Hamburger2456", "User 2", hamburger2);
+        AnnouncementEntity announcement5 = new AnnouncementEntity(4, "Hamburger", "pão, egg e meal", 1, "Hamburger456",
+                "User 2", hamburger);
+        AnnouncementEntity announcement6 = new AnnouncementEntity(5, "Coke", "Coke freezed 1 L", 1, "Coke456", "User 2",
+                coke);
+        AnnouncementEntity announcement7 = new AnnouncementEntity(6, "Food Stamp", "food for a month", 1,
+                "FoodStamp456", "User 2", hamburger);
+        AnnouncementEntity announcement8 = new AnnouncementEntity(7, "Hamburger 2", "pão, egg, salad e meal", 1,
+                "Hamburger2456", "User 2", hamburger2);
 
-        AnnouncementEntity announcement9 = new AnnouncementEntity(8,"Hamburger", "pão, egg e meal", 2, "Hamburger789", "User 3", hamburger);
-        AnnouncementEntity announcement10 = new AnnouncementEntity(9,"Coke", "Coke freezed 1 L", 2, "Coke789", "User 3", coke);
-        AnnouncementEntity announcement11 = new AnnouncementEntity(10,"Food Stamp", "food for a month", 2, "FoodStamp789", "User 3", hamburger);
-        AnnouncementEntity announcement12 = new AnnouncementEntity(11,"Hamburger 2", "pão, egg, salad e meal", 2, "Hamburger789", "User 3", hamburger2);
+        AnnouncementEntity announcement9 = new AnnouncementEntity(8, "Hamburger", "pão, egg e meal", 2, "Hamburger789",
+                "User 3", hamburger);
+        AnnouncementEntity announcement10 = new AnnouncementEntity(9, "Coke", "Coke freezed 1 L", 2, "Coke789",
+                "User 3", coke);
+        AnnouncementEntity announcement11 = new AnnouncementEntity(10, "Food Stamp", "food for a month", 2,
+                "FoodStamp789", "User 3", hamburger);
+        AnnouncementEntity announcement12 = new AnnouncementEntity(11, "Hamburger 2", "pão, egg, salad e meal", 2,
+                "Hamburger789", "User 3", hamburger2);
 
         announcementList.put(announcement1.getId(), announcement1.toMap());
         announcementList.put(announcement2.getId(), announcement2.toMap());
@@ -98,12 +105,14 @@ public class HomeDatasource implements IHomeDatasource {
     }
 
     @Override
-    public AnnouncementEntity createAnnouncement(AnnouncementEntity announcementParam) throws CreateAnnouncementError, IHomeException {
-        if (announcementList.isEmpty()) fillDataBase();
+    public AnnouncementEntity createAnnouncement(AnnouncementEntity announcementParam)
+            throws CreateAnnouncementError, IHomeException {
+        if (announcementList.isEmpty())
+            fillDataBase();
 
         int id = announcementList.size();
 
-        while (announcementList.containsKey(id)){
+        while (announcementList.containsKey(id)) {
             id++;
         }
 
@@ -111,13 +120,13 @@ public class HomeDatasource implements IHomeDatasource {
         announcementParam.setId(id);
         announcementList.put(id, announcementParam.toMap());
 
-
         return announcementParam;
     }
 
     @Override
     public List<AnnouncementEntity> listAllAnnouncement() throws ListAnnouncementError, IHomeException {
-        if (announcementList.isEmpty()) fillDataBase();
+        if (announcementList.isEmpty())
+            fillDataBase();
         List<AnnouncementEntity> listAnonouncementEntity = new ArrayList<AnnouncementEntity>();
 
         for (Map.Entry<Integer, Map<String, Object>> entry : announcementList.entrySet()) {
@@ -131,14 +140,15 @@ public class HomeDatasource implements IHomeDatasource {
 
     @Override
     public List<AnnouncementEntity> listMyAnnouncement(int userID) throws ListAnnouncementError, IHomeException {
-        if (announcementList.isEmpty()) fillDataBase();
+        if (announcementList.isEmpty())
+            fillDataBase();
         List<AnnouncementEntity> listAnonouncementEntity = new ArrayList<AnnouncementEntity>();
 
         for (Map.Entry<Integer, Map<String, Object>> entry : announcementList.entrySet()) {
             int key = entry.getKey();
             Map<String, Object> value = entry.getValue();
             AnnouncementEntity tempEntity = AnnouncementEntity.fromMap(value);
-            if(tempEntity.getSellerId() == userID) {
+            if (tempEntity.getSellerId() == userID) {
                 listAnonouncementEntity.add(tempEntity);
             }
         }
@@ -147,8 +157,10 @@ public class HomeDatasource implements IHomeDatasource {
     }
 
     @Override
-    public List<AnnouncementEntity> deleteMyAnnouncement(int userID, String productCode) throws ListAnnouncementError, IHomeException {
-        if (announcementList.isEmpty()) fillDataBase();
+    public List<AnnouncementEntity> deleteMyAnnouncement(int userID, String productCode)
+            throws ListAnnouncementError, IHomeException {
+        if (announcementList.isEmpty())
+            fillDataBase();
 
         boolean removed = false;
         int removeKey = -1;
@@ -157,19 +169,18 @@ public class HomeDatasource implements IHomeDatasource {
             int key = entry.getKey();
             Map<String, Object> value = entry.getValue();
             AnnouncementEntity tempEntity = AnnouncementEntity.fromMap(value);
-            if(tempEntity.getSellerId() == userID && tempEntity.getProductCode().equalsIgnoreCase(productCode)) {
-                //announcementList.keySet().removeIf(keyValue -> keyValue == key);
+            if (tempEntity.getSellerId() == userID && tempEntity.getProductCode().equalsIgnoreCase(productCode)) {
+                // announcementList.keySet().removeIf(keyValue -> keyValue == key);
                 removeKey = key;
                 removed = true;
             }
         }
 
-        if (removeKey != -1){
+        if (removeKey != -1) {
             announcementList.remove(removeKey);
         }
 
-
-        if (!removed){
+        if (!removed) {
             throw new DeleteAnnouncementError("no items found");
         }
 

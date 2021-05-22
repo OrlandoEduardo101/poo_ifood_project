@@ -4,10 +4,7 @@ import modules.auth.domain.errors.LoginUserFailure;
 import modules.auth.domain.errors.RegisterUserFailure;
 import modules.auth.domain.models.AuthParam;
 import modules.auth.domain.models.UserModel;
-import modules.auth.domain.repository.IAuthRepository;
 import modules.auth.infra.datasources.IAuthDatasource;
-import modules.auth.infra.repositories.AuthRepository;
-import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.util.HashMap;
 import java.util.Map;
