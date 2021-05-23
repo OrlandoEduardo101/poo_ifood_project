@@ -98,6 +98,7 @@ public class UserModel {
     public Map toMap(){
 
         Map<String, String> map = new HashMap<String, String>();
+        map.put("id", String.valueOf(this.id));
         map.put("name", this.name);
         map.put("undername", this.undername);
         map.put("CPF", this.CPF);
@@ -111,6 +112,7 @@ public class UserModel {
     public static UserModel fromMap(Map<String, String> map){
 
         UserModel model = new UserModel();
+        model.setId(Integer.parseInt(map.get("id")));
         model.setName(map.get("name"));
         model.setUndername(map.get("undername"));
         model.setCPF(map.get("CPF"));

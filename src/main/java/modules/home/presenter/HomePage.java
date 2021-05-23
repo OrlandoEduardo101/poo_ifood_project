@@ -1,6 +1,7 @@
 package modules.home.presenter;
 
 import di.InjectionDependency;
+import modules.auth.presenter.Auth;
 import modules.home.domain.errors.IHomeException;
 
 import java.util.InputMismatchException;
@@ -60,7 +61,10 @@ public class HomePage {
             System.out.println("[2] List My Annoucement");
             try {
                 controller.listMyAll();
-                if (controller.announcementEntityList.size() > 10) {
+                if(controller.announcementEntityList.size() == 0) {
+                    System.out.println("You have no announcement");
+                }
+                else if (controller.announcementEntityList.size() > 10) {
                     for (int i = 0; i < 10; i++) {
                         System.out.println(controller.announcementEntityList.get(i).toString() + "\n");
                     }
@@ -82,6 +86,7 @@ public class HomePage {
             //return;
         } else if (option == 4) {
             System.out.println("[4] to exit");
+            new Auth().loginOrResgister();
             //return;
         }
     }
